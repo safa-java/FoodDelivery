@@ -1,7 +1,4 @@
-package com.fsdproject.FoodDeliveryApp.controller;
-
-
-
+package com.fooddelivery.controller;
 
 
 import java.util.List;
@@ -18,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fsdproject.FoodDeliveryApp.entity.MenuItems;
-import com.fsdproject.FoodDeliveryApp.service.MenuItemsService;
+import com.fooddelivery.entity.MenuItems;
+import com.fooddelivery.exception.FoodNotFoundException;
+import com.fooddelivery.service.MenuItemsService;
 
 
 
-//import com.foodies.service.OrderServiceImp;
 
 @RestController
 @RequestMapping("/menu")
@@ -33,8 +30,6 @@ public class MenuItemsController {
 	private MenuItemsService menuitemsService;
 	
 
-	//user service
-//	OrderServiceImp orderService;
 	
 	@GetMapping("/foods")
     public ResponseEntity<List<MenuItems>> getAllFoods() {
@@ -43,13 +38,13 @@ public class MenuItemsController {
 		try {
 			foods = menuitemsService.getAllFoods();
 		} catch (Exception e) {
-			System.out.println(e);
+			//logger.log(e)
 		}
         return new ResponseEntity<>(foods, HttpStatus.OK);
     }
 	
     @GetMapping("/foods/{foodId}")
-    public ResponseEntity<MenuItems> getFoodById(@PathVariable("foodId") int foodId)throws Exception {
+    public ResponseEntity<MenuItems> getFoodById(@PathVariable("foodId") int foodId)throws FoodNotFoundException {
     	MenuItems food = menuitemsService.getFoodById(foodId);
         if (food != null) {
             return new ResponseEntity<>(food, HttpStatus.OK);
@@ -76,55 +71,15 @@ public class MenuItemsController {
     }
 
     @DeleteMapping("/deleteFood/{foodId}")
-    public ResponseEntity<Void> deleteFood(@PathVariable("foodId") int foodId) throws Exception {
+    public ResponseEntity<Void> deleteFood(@PathVariable("foodId") int foodId) throws FoodNotFoundException {
         boolean deleted = menuitemsService.deleteFood(foodId);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
+    } 
     
-    /*@PostMapping("/{foodId}/addToCart")
-    public ResponseEntity<String> addToCart(@PathVariable int foodId) {
-        // Check if the food item is available and perform validation 
-        MenuItems food = menuitemsService.getFoodById(foodId);
-        
-        if (food.getStatus() != "available") {
-            return ResponseEntity.badRequest().body("Food item not found");
-        }
-        cartService.addToCart(foodId);
 
-        return ResponseEntity.ok("Food item added to cart successfully");
-    }*/
-    
-    
-    // User Management
 
-//    @GetMapping("/users")
-//    public ResponseEntity<List<User>> getAllUsers() {
-//        List<User> users = userService.getAllUsers();
-//        return new ResponseEntity<>(users, HttpStatus.OK);
-//    }
-//    
-//    @DeleteMapping("/users/{userId}")
-//    public ResponseEntity<Void> deleteUserAccount(@PathVariable("userId") Long userId) {
-//        boolean deleted = userService.deleteUser(userId);
-//        if (deleted) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
-//    
-//    //order management
-//    
-//    @GetMapping("/orders")
-//    public ResponseEntity<List<Order>> getAllOrders() throws OrderNotFoundException{
-//        List<Order> orders = orderService.viewOrder();//get all orders from order service
-//        return new ResponseEntity<>(orders, HttpStatus.OK);
-//    }
-//    
-
-//    ;;
 }

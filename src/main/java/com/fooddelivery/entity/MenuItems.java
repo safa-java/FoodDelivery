@@ -1,4 +1,4 @@
-package com.fsdproject.FoodDeliveryApp.entity;
+package com.fooddelivery.entity;
 
 
 
@@ -8,13 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
 
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
 @Entity
 @Table(name="menuitems")
 public class MenuItems {
@@ -31,7 +25,7 @@ public class MenuItems {
 	private String category;
 	
 	@Column(name="unit_price")
-	private int unit_price;
+	private int unitPrice;
 	
 
 	public int getFoodId() {
@@ -52,30 +46,24 @@ public class MenuItems {
 		this.category = category;
 	}
 
-	public int getUnit_price() {
-		return unit_price;
+	public int getUnitPrice() {
+		return unitPrice;
 	}
 
-	public void setUnit_price(int unit_price) {
-		this.unit_price = unit_price;
+	public void setUnitPrice(int unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
 
 	
 
-	public MenuItems(int foodId, String foodName, String category, int unit_price) {
+	public MenuItems(int foodId, String foodName, String category, int unitPrice) {
 		super();
 		this.foodId = foodId;
 		this.foodName = foodName;
 		this.category = category;
-		this.unit_price = unit_price;
+		this.unitPrice = unitPrice;
 	
-	}
-
-	@Override
-	public String toString() {
-		return "MenuItems [foodId=" + foodId + ", foodName=" + foodName + ", category=" + category + ", unit_price="
-				+ unit_price + "]";
 	}
 
 	public String getFoodName() {
@@ -89,7 +77,7 @@ public class MenuItems {
 
 	public MenuItems() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 

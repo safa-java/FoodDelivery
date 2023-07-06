@@ -1,13 +1,13 @@
-package com.fsdproject.FoodDeliveryApp.service;
+package com.fooddelivery.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fsdproject.FoodDeliveryApp.entity.MenuItems;
-import com.fsdproject.FoodDeliveryApp.exception.FoodNotFoundException;
-import com.fsdproject.FoodDeliveryApp.repo.MenuItemsRepo;
+import com.fooddelivery.entity.MenuItems;
+import com.fooddelivery.exception.FoodNotFoundException;
+import com.fooddelivery.repo.MenuItemsRepo;
 
 
 @Service
@@ -35,7 +35,7 @@ public class MenuItemsServiceImpl implements MenuItemsService {
         if (existingFood != null) {
             existingFood.setFoodName(updatedFood.getFoodName());
             existingFood.setCategory(updatedFood.getCategory());
-            existingFood.setUnit_price(updatedFood.getUnit_price());
+            existingFood.setUnitPrice(updatedFood.getUnitPrice());
    
             return menuItemsRepo.save(existingFood);
         } else {
